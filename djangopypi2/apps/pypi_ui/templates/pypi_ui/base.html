@@ -24,6 +24,7 @@
               {% if request.user.is_staff %}
               <li {% block manage_section %}{% endblock %}><a href="{% url 'djangopypi2-manage' %}">Manage</a></li>
               {% endif %}
+              <li {% block guide_section %}{% endblock %}><a href="{% url 'djangopypi2-guide' %}">Guide</a></li>
             </ul>
           </div>
           <ul class="nav pull-right">

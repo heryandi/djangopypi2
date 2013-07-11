@@ -1,0 +1,271 @@
+{% extends 'pypi_ui/base.html' %}
+{% block guide_section %}class="active"{% endblock %}
+
+{% block content %}
+<ul class="nav nav-tabs" id="guideTab">
+    <li class="active"><a href="#home" data-toggle="tab">Welcome!</a></li>
+    <li><a href="#download" data-toggle="tab">Downloading & Using</a></li>
+    <li><a href="#upload" data-toggle="tab">Developing & Uploading</a></li>
+    <li><a href="#advanced" data-toggle="tab">Advanced</a></li>
+</ul>
+ 
+<div class="tab-content">
+    <div class="tab-pane active" id="home">
+        <h3>Welcome!</h3>
+        <p>
+            Welcome to the Mininet package repository tutorial!
+            This tutorial will guide you on how to download and upload Mininet packages.
+        </p>
+        <p>
+            If you are already familiar with Python packaging system, you will feel right at home as Mininet package is just a Python package.
+            To start the tutorial, you can use the tabs above to navigate to the different section of the tutorials.
+        </p>
+    </div>
+
+    <div class="tab-pane" id="download">
+        <h3>Setup</h3>
+        <h4>TODO: Change once tool developed</h4>
+        <p>
+            In order to download packages, you will need to install several packages:
+            <ul>
+                <li><a href="https://pypi.python.org/pypi/pip">pip</a></li>
+                <li><a href="http://www.virtualenv.org">virtualenv</a></li>
+            </ul>
+            <p>If you are using Ubuntu, you can easily install those packages with this command:</p>
+            <pre>sudo apt-get install python-virtualenv python-pip</pre>
+        </p>
+
+        <h4>Virtual Environment</h4>
+        <h5>Creating a virtual environment</h5>
+        <p>
+            Although this step is optional, it is highly recommended.
+            All the subsequent sections will assume that you don't skip over this step :)
+        </p>
+        <p>
+            Virtual environment is an isolated Python environment that is used to help you manage package dependencies.
+            By using virtual environment, it is possible to have a package of version 1.0 in one environment and the same package but with version 2.0 in another environment.
+            If you are not using virtual environment, then this will lead to a version conflict.
+            If this sounds gibberish, just trust me and create a separate virtual environment for each of your experiments :)
+        </p>
+        <p>
+            <p>To create a virtual environment, simply use this command:</p>
+            <pre>virtualenv --distribute &lt;folder_name&gt;</pre>
+
+            <p>For example, to create a virtual environment under the folder venv, use the command as below:</p>
+            <pre>user@ubuntu:~/Desktop$ virtualenv --distribute venv
+New python executable in venv/bin/python
+Installing distribute...........................................................................................................................................................................................................................done.
+Installing pip................done.</pre>
+        </p>
+        <h5>Activating a virtual environment</h5>
+        <p>
+            Once the virtual environment folder is created, it has to be activated in order to use it.
+            To activate the virtual environment, simply cd into the virtual environment folder and run this command:
+        </p>
+        <pre>. bin/activate</pre>
+
+        <p>
+            For example, to activate the virtual environment folder we created in the previous example:
+        </p>
+        <pre>user@ubuntu:~/Desktop/venv$ . bin/activate
+(venv)user@ubuntu:~/Desktop/venv$ which python
+/home/user/Desktop/venv/bin/python
+(venv)user@ubuntu:~/Desktop/venv$</pre>
+        <p>
+            In the example above, once the virtual environment is activated, notice that the prompt is prepended with <span class="label">(venv)</span> in the above example.
+            This indicates that the <span class="label">venv</span> virtual environment is active.
+            Notice also that the <span class="label">python</span> executable is located somewhere inside the virtual environment folder.
+            This is the intended behaviour.
+        </p>
+        <p class="text-error">
+            Note: Do NOT copy/move the virtual environment folder around once it is created as it may lead to strange errors.
+            We recommend you to recreate the virtual environment from scratch rather than copying/moving around the folder.
+        </p>
+
+        <h3>Downloading and installing a package</h3>
+        <p>
+            There are 2 ways to download a Mininet package.
+            The first is to simply surf around this website and click the download link from the package project page.
+            The second way is to use a command-line tool.
+        </p>
+        <p>
+            The recommended way is to use the command-line tool.
+            This is because the command-line tool automatically downloads all the dependencies of the package as well.
+            The command-line tools will also automatically install the package by putting all the files into the correct folders.
+            This tutorial will guide you on how to download and install a Mininet package using the command-line tool.
+        </p>
+
+        <h4>Package downloading &amp; installation with command-line tool</h4>
+        <p>
+            You may want to use this website to search for packages that you want to install.
+            Once you find the package that you want to install, make sure you remember the package name.
+            To actually install the package, use the command below:
+        </p>
+        <pre>pip install -i http://localhost:8000/simple/ &lt;package_name&gt;</pre>
+        <p>
+            For example, to install a package called <span class="label">TowelStuff</span>, use the command as below:
+        </p>
+        <pre>(venv)user@ubuntu:~/Desktop/venv$ pip install --find-links http://localhost:8000/simple/ TowelStuff
+Downloading/unpacking TowelStuff
+    Running setup.py egg_info for package TowelStuff
+......... (long outputs) .........
+Successfully installed TowelStuff
+Cleaning up...</pre>
+        <p>That is all for package installation.</p>
+
+        <h3>Using an installed package</h3>
+        <p>Make sure that your virtual environment is activated when you want to use your installed package.</p>
+        <p>
+            If you are interested in using the executable(s) provided by an installed package, you can simply run it from command-line just like how you will run another program.
+            You can go to the <span class="label">bin/</span> folder under the virtual environment to see all the installed executables.
+        </p>
+        <p>
+            If you are interested in using a package as a library to your own Mininet module, a normal python import statement will work just fine.
+        </p>
+    </div>
+
+    <div class="tab-pane" id="upload">
+        <h3>Setup</h3>
+        <h4>TODO: Change once tool developed</h4>
+        <p>
+            In order to contribute new packages, you will need to register an account first.
+        </p>
+        <p>
+            Once you are registered, create a file called <span class="label">.pypirc</span> on your home directory with this content:
+        </p>
+        <pre>[distutils]
+index-servers =
+    mininet
+
+[mininet]
+username: &lt;your_username&gt;
+password: &lt;your_password&gt;
+repository: http://localhost:8000/pypi/</pre>
+
+        <h3>Developing a package</h3>
+        <p>
+            In order to have your project packaged properly, your project will have to follow a certain structure.
+            You may want to download the mininet-starter package and customize it according to your needs rather than writing a project from scratch.
+            <p class="text-error">TODO: Create the mininet-starter package</p> 
+            The project structure is as described below:
+        </p>
+        <pre>virtual_environment_folder/
+    your_project/
+        bin/
+            ... your executables ...
+        docs/
+            ... your documentation ...
+        CHANGES.txt
+        LICENSE.txt
+        MANIFEST.in
+        README.txt
+        setup.py
+        your_project_package/
+            __init__.py
+            ... your *.py source code ...
+            test/
+                __init__.py
+                ... your *.py test cases ...</pre>
+        <p>
+            The content of each items in the structure is as described below:
+            <ul>
+                <li>
+                    The <span class="label">bin/</span> folder should all the executables that you want to distribute with your project.
+                    It can be anything from python files to bash shell scripts.
+                </li>
+                <li>
+                    The <span class="label">docs/</span> folder should be the place to put all your documentation files you have.
+                </li>
+                <li>
+                    <span class="label">CHANGES.txt</span> should contain the changelogs of your package.
+                    This is optional though it is a good practice to have it.
+                </li>
+                <li>
+                    <span class="label">LICENSE.txt</span> should contain the license text of your choice.
+                    You may want to copy and paste the exact text from a popular <a href="http://opensource.org/licenses">open source license</a>.
+                </li>
+                <li>
+                    <span class="label">MANIFEST.in</span> should contain the list of additional files you want to put in the package specified in its own syntax.
+                    An example MANIFEST.in is given below:
+                    <pre>include *.txt
+recursive-include docs *.txt</pre>
+                    The example above means that you want to include all files ending with .txt in the package root directory and also every .txt files under docs/ folder.
+                </li>
+                <li>
+                    <span class="label">README.txt</span> should contain the project documentation in <a href="http://docutils.sourceforge.net/rst.html">reStructuredText</a> syntax.
+                    Make sure to write this properly as it will be used to generate the project page in the Mininet repository.
+                    You may find this <a href="http://docutils.sourceforge.net/docs/user/rst/quickstart.html">quick guide</a> and this <a href="http://www.tele3.cz/jbar/rest/rest.html">online renderer</a> useful.
+                </li>
+                <li>
+                    The <span class="label">your_project_package/</span> folder should contain all your package source code.
+                    The <span class="label">test/</span> folder under your_package_project/ should contain all your test cases.
+                </li>
+                <li>
+                    Finally, <span class="label">setup.py</span> should contain the project metadata.
+                    The project metadata can be defined as in the following example:
+                    <pre>import os
+from setuptools import setup, find_packages
+
+scripts = [os.path.join('bin', filename) for filename in os.listdir('bin')]
+
+setup(
+    name='&lt;package_name&gt;'
+    version='&lt;package_version&gt;',
+    description='&lt;short_package_description&gt;',
+    author='&lt;your_name&gt;',
+    author_email= '&lt;your_email&gt;',
+    packages=find_packages(exclude='test'),
+    scripts=scripts,
+    url='<project_external_url>',
+    long_description=open('README.txt').read(),
+      classifiers=[
+          &lt;comma_separated_strings&gt;
+      ],
+      keywords= '&lt;space_separated_keywords&gt;',
+      license='&lt;license_name&gt;',
+      install_requires=[
+        &lt;comma_separated_package_names&gt;
+      ])</pre>
+                <p>
+                    <ul>
+                        <li>name, version, description, author, author_email should be clear enough.</li>
+                        <li>url should contain the external URL of the project. This can be a link to the project repository or the external project home page.</li>
+                        <li>
+                            classifiers should contain list of classifier strings for this package.
+                            The list of valid classifiers are available from the advanced search page.
+                        </li>
+                        <li>
+                            keywords should contain list of keywords associated with this package.
+                        </li>
+                        <li>
+                            license should contain only the name of the license you have chosen.
+                        </li>
+                        <li>
+                            install_requires should contain the list of dependencies of this package.
+                        </li>
+                    </ul>
+                </p>
+                </li>
+            </ul>
+        </p>
+
+        <h3>Uploading a package</h3>
+        <p>
+            Once you are are ready to upload your package to the Mininet repository, 
+            simply cd into the directory where the <span class="label">setup.py</span> file is located and run this command:
+        </p>
+        <pre>python setup.py register -r mininet sdist --force-manifest upload -r mininet</pre>
+        <p>The command above will automatically zip your package together and then upload it to the server.</p>
+    </div>
+
+    <div class="tab-pane" id="advanced">
+        <h4>Permission Management</h4>
+        <p>
+            For every package that you uploaded, you will automatically be added as the owner and the maintainer of the package.
+            The maintainers of the project are the people who can upload the new versions of a package.
+            The owners of the project can do everything a maintainer can do and are also the people capable of deleting a package and manage the package permission.
+            If you as an owner want to add another person as either an owner or a maintainer, it can be done by visiting the package project page and click on the Manage Permission button.
+        </p>
+    </div>
+</div>
+{% endblock %}
