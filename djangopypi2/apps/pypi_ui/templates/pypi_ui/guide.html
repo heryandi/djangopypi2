@@ -3,7 +3,7 @@
 
 {% block content %}
 <ul class="nav nav-tabs" id="guideTab">
-    <li class="active"><a href="#home" data-toggle="tab">Welcome!</a></li>
+    <li class="active"><a href="#home" data-toggle="tab">Getting Started</a></li>
     <li><a href="#download" data-toggle="tab">Downloading & Using</a></li>
     <li><a href="#upload" data-toggle="tab">Developing & Uploading</a></li>
     <li><a href="#advanced" data-toggle="tab">Advanced</a></li>
@@ -15,16 +15,15 @@
         <p>
             Welcome to the Mininet package repository tutorial!
             This tutorial will guide you on how to download and upload Mininet packages.
+            If you are already familiar with Python packaging system, you will feel right at home as Mininet package is just a Python package.
         </p>
         <p>
-            If you are already familiar with Python packaging system, you will feel right at home as Mininet package is just a Python package.
-            To start the tutorial, you can use the tabs above to navigate to the different section of the tutorials.
+            Before you get started though, there are several things below that you will want to do first.
+            Once you are done with these, you may use the tabs above to navigate to the different sections of the tutorials.
         </p>
-    </div>
 
-    <div class="tab-pane" id="download">
         <h3>Setup</h3>
-        <h4>TODO: Change once tool developed</h4>
+        <h4>Software Installation</h4>
         <p>
             In order to download packages, you will need to install several packages:
             <ul>
@@ -84,26 +83,47 @@ Installing pip................done.</pre>
 
         <h4>Installing mnp</h4>
         <p>
-            To make it easier to download (and upload) packages, a package called <span class="label">mnp</span> has been developed.
+            To make it easier to download and upload packages, a package called <span class="label">mnp</span> has been developed.
             To install <span class="label">mnp</span> into your virtual environment, make sure the virtual environment is activated and then use the command below:
         </p>
         <pre>pip install --extra-index-url http://localhost:8000/simple/ mnp</pre>
         <h4>TODO: Change URL later!</h4>
 
+        <h4>Account registration and .pypirc</h4>
+        <p>
+            You may skip over this step, if you don't intend to contribute new packages yet.
+            In order to be able to contribute new packages, you will need to register for an account first.
+        </p>
+        <p>
+            Once you are registered, create a file called <span class="label">.pypirc</span> on your home directory with this content:
+        </p>
+        <pre>[distutils]
+index-servers =
+    mininet
+
+[mininet]
+username: &lt;your_username&gt;
+password: &lt;your_password&gt;
+repository: http://localhost:8000/pypi/</pre>
+        <h4>TODO: Change URL later!</h4>
+
+    </div>
+
+    <div class="tab-pane" id="download">
         <h3>Downloading and installing a package</h3>
         <p>
             There are 2 ways to download a Mininet package.
             The first is to simply surf around this website and click the download link from the package project page.
-            The second way is to use a command-line tool.
+            By doing this, you will have to manually download all the packages your package depends on.
         </p>
         <p>
-            The recommended way is to use the command-line tool.
-            This is because the command-line tool automatically downloads all the dependencies of the package as well.
-            The command-line tools will also automatically install the package by putting all the files into the correct folders.
-            This tutorial will guide you on how to download and install a Mininet package using the command-line tool.
+            The second and recommended way is to use <span class="label">mnp</span>.
+            This is because it will automatically download all the dependencies of the package as well.
+            mnp will also automatically install the package by putting all the files into the correct folders.
+            This tutorial will assume that you will be using mnp.
         </p>
 
-        <h4>Package downloading &amp; installation with command-line tool</h4>
+        <h4>Package downloading &amp; installation with mnp</h4>
         <p>
             You may want to use this website to search for packages that you want to install.
             Once you find the package that you want to install, make sure you remember the package name.
@@ -145,23 +165,6 @@ Cleaning up...</pre>
     </div>
 
     <div class="tab-pane" id="upload">
-        <h3>Setup</h3>
-        <h4>TODO: Change once tool developed</h4>
-        <p>
-            In order to contribute new packages, you will need to register an account first.
-        </p>
-        <p>
-            Once you are registered, create a file called <span class="label">.pypirc</span> on your home directory with this content:
-        </p>
-        <pre>[distutils]
-index-servers =
-    mininet
-
-[mininet]
-username: &lt;your_username&gt;
-password: &lt;your_password&gt;
-repository: http://localhost:8000/pypi/</pre>
-
         <h3>Developing a package</h3>
         <h4>Project Structure</h4>
         <p>
@@ -209,8 +212,8 @@ repository: http://localhost:8000/pypi/</pre>
                     <span class="label">MANIFEST.in</span> should contain the list of additional files you want to put in the package specified in its own syntax.
                     An example MANIFEST.in is given below:
                     <pre>include *.txt *.rst
-recursive-include docs *.txt</pre>
-                    The example above means that you want to include all files ending with .txt in the package root directory and also every .txt files under docs/ folder.
+recursive-include docs *.txt *.rst</pre>
+                    The example above means that you want to include all files ending with .txt and .rst in the package root directory and also every .txt and .rst files under docs/ folder.
                 </li>
                 <li>
                     <span class="label">README.rst</span> should contain the project documentation in <a href="http://docutils.sourceforge.net/rst.html">reStructuredText</a> syntax.
@@ -293,7 +296,7 @@ setup(
         <h3>Uploading a package</h3>
         <p>
             Once you are are ready to upload your package to the Mininet repository, 
-            simply cd into the directory where the <span class="label">setup.py</span> file is located and run this command:
+            simply go into the directory where the <span class="label">setup.py</span> file is located and run this command:
         </p>
         <pre>mnp upload</pre>
         <p>The command above will automatically zip your package together and then upload it to the server,
@@ -307,6 +310,14 @@ setup(
             The maintainers of the project are the people who can upload the new versions of a package.
             The owners of the project can do everything a maintainer can do and are also the people capable of deleting a package and manage the package permission.
             If you as an owner want to add another person as either an owner or a maintainer, it can be done by visiting the package project page and click on the Manage Permission button.
+        </p>
+
+        <h4>About mnp</h4>
+        <p>
+            mnp is simply a wrapper over existing Python tools to download and upload packages, namely distribute and pip.
+            Under the hood, mnp commands are translated to craft either distribute or pip commands and then executed.
+            Knowing this, it is possible that sometimes you may want to directly use distribute/pip.
+            This is perfectly acceptable.
         </p>
     </div>
 </div>
