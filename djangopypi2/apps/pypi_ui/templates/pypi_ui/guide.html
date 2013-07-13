@@ -128,8 +128,20 @@ Cleaning up...</pre>
             You can go to the <span class="label">bin/</span> folder under the virtual environment to see all the installed executables.
         </p>
         <p>
-            If you are interested in using a package as a library to your own Mininet module, a normal python import statement will work just fine.
+            If you are interested in using an installed package as a library to your own Mininet module, a normal python import statement will work just fine.
+            If for some reasons you need to reference the source code of an installed package, then it is usually located under <span class="label">lib/pythonX.Y/site-packages/</span>
+            where X.Y is your python version.
         </p>
+        <p>
+            If you need to use this location in part of your script, you may want to use this one-liner:
+        </p>
+        <pre>python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())"</pre>
+        <p>
+            Or using it inside python REPL:
+        </p>
+        <pre>>>> from distutils.sysconfig import get_python_lib
+>>> get_python_lib()
+'/home/user/Desktop/venv/lib/python2.7/site-packages'</pre>
     </div>
 
     <div class="tab-pane" id="upload">
