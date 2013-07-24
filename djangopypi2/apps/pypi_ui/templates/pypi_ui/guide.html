@@ -170,14 +170,14 @@ Cleaning up...</pre>
         <p>
             In order to have your project packaged properly, your project will have to follow a certain structure.
             You may want to download the mininet-starter package and customize it according to your needs rather than writing a project from scratch.
-            <p class="text-error">TODO: Create the mininet-starter package</p> 
+            <p class="text-error">TODO: Add hyperlink to mininet-starter package once finalized</p> 
             The project structure is as described below:
         </p>
         <pre>virtual_environment_folder/
     your_project/
         bin/
             ... your executables ...
-        docs/
+        doc/
             ... your documentation ...
         CHANGES.txt
         LICENSE.txt
@@ -198,7 +198,7 @@ Cleaning up...</pre>
                     It can be any python scripts.
                 </li>
                 <li>
-                    The <span class="label">docs/</span> folder should be the place to put all your documentation files you have.
+                    The <span class="label">doc/</span> folder should be the place to put all your documentation files you have.
                 </li>
                 <li>
                     <span class="label">CHANGES.txt</span> should contain the changelogs of your package.
@@ -212,8 +212,8 @@ Cleaning up...</pre>
                     <span class="label">MANIFEST.in</span> should contain the list of additional files you want to put in the package specified in its own syntax.
                     An example MANIFEST.in is given below:
                     <pre>include *.txt *.rst
-recursive-include docs *.txt *.rst</pre>
-                    The example above means that you want to include all files ending with .txt and .rst in the package root directory and also every .txt and .rst files under docs/ folder.
+recursive-include doc *.txt *.rst</pre>
+                    The example above means that you want to include all files ending with .txt and .rst in the package root directory and also every .txt and .rst files under doc/ folder.
                 </li>
                 <li>
                     <span class="label">README.rst</span> should contain the project documentation in <a href="http://docutils.sourceforge.net/rst.html">reStructuredText</a> syntax.
@@ -245,6 +245,9 @@ setup(
     scripts=[&lt;space_separated_strings&gt;],
     url='&lt;project_external_url&gt;',
     long_description=open('README.rst').read(),
+    data_files=[
+        ("share/doc/&lt;package_name&gt;", ["doc/EXAMPLE.txt", "doc/SAMPLE.txt"])
+    ],
     classifiers=[
         &lt;comma_separated_strings&gt;
     ],
@@ -265,30 +268,41 @@ setup(
     })</pre>
         <p>
             <ul>
-                <li>name, version, description, author, author_email should be clear enough.</li>
+                <li><span class="label">name</span>, <span class="label">version</span>, <span class="label">description</span>, <span class="label">author</span>, <span class="label">author_email</span> should be clear enough.</li>
                 <li>
-                    entry_points should contain the list of executables that will be automatically generated from source code when users install this package.
+                    <span class="label">entry_points</span> should contain the list of executables that will be automatically generated from source code when users install this package.
                 </li>
                 <li>
-                    scripts should contain the relative path to the executables for this package.
+                    <span class="label">scripts</span> should contain the relative path to the executables for this package.
                     It usually contains list of files under the <span class="label">bin/</span> directory.
                 </li>
                 <li>
-                    url should contain the external URL of the project.
+                    <span class="label">url</span> should contain the external URL of the project.
                     This can be a link to the project repository or the external project home page.
                 </li>
                 <li>
-                    classifiers should contain list of classifier strings for this package.
+                    <span class="label">long_description</span> should contain the string containing the full description and/or short documentation.
+                    In most cases, reusing the content of README.rst is good enough.
+                </li>
+                <li>
+                    <span class="label">data_files</span> is used to list additional files that should be additionally copied when the package is installed.
+                    This is useful to distribute documentation or any other files along with the package.
+                    This value is written as a list of tuples where each tuple contains 2 values.
+                    The first value represents the destination folder for the files while the second value is a list of files to copy into the destination folder.
+                    In the example above, it is specified that the files doc/EXAMPLE.txt and doc/SAMPLE.txt should be copied into share/doc/&lt;package_name&gt; folder.
+                </li>
+                <li>
+                    <span class="label">classifiers</span> should contain list of classifier strings for this package.
                     The list of valid classifiers are available from the advanced search page.
                 </li>
                 <li>
-                    keywords should contain list of keywords associated with this package.
+                    <span class="label">keywords</span> should contain list of keywords associated with this package.
                 </li>
                 <li>
-                    license should contain only the name of the license you have chosen.
+                    <span class="label">license</span> should contain only the name of the license you have chosen.
                 </li>
                 <li>
-                    install_requires should contain the list of dependencies of this package.
+                    <span class="label">install_requires</span> should contain the list of dependencies of this package.
                 </li>
             </ul>
         </p>
