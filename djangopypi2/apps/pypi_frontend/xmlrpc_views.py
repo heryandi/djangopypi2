@@ -1,4 +1,5 @@
 import xmlrpclib
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseNotAllowed, HttpResponse
 from ..pypi_packages.models import Package
 from ..pypi_packages.models import Release
@@ -149,6 +150,45 @@ def changelog(since):
 def ratings(request, name, version, since):
     return XMLRPCResponse(params=([],))
 
+def docs(request, package_name):
+    response = ''
+    try:
+        release = Package.objects.get(name=package_name).latest
+        response = release.package_info['description']
+    except ObjectDoesNotExist:
+        response = 'Package with name %s not found.' % package_name
+    return XMLRPCResponse(params=(response,))
+
+def info(request, package_name, package_version = -1):
+    output = {
+        'name': '',
+        'version': '',
+        'summary': '',
+        'author': '',
+        'home_page': '',
+        'project_page': ''
+    }
+    release = None
+    if package_version == -1:
+        try:
+            release = Package.objects.get(name=package_name).latest
+        except ObjectDoesNotExist:
+            pass
+    else:
+        try:
+            release = Package.objects.get(name=package_name).releases.get(version=package_version)
+        except ObjectDoesNotExist:
+            pass
+
+    if release is not None:
+        output["name"] = package_name
+        output["version"] = release.version
+        for key, value in release.package_info.items():
+            if key in output:
+                output[key] = value
+        output["project_page"] = request.build_absolute_uri(release.get_absolute_url())
+    return XMLRPCResponse(params=(output,))
+
 XMLRPC_COMMANDS = {
     'list_packages': list_packages,
     'package_releases': package_releases,
@@ -157,4 +197,8 @@ XMLRPC_COMMANDS = {
     'search': search,
     #'changelog': changelog, Not done yet
     #'ratings': ratings, Not done yet
+
+    # Non-standard:
+    'docs': docs,
+    'info': info,
 }
