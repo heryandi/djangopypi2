@@ -84,13 +84,20 @@ ROOT_URLCONF = 'djangopypi2.website.urls'
 
 WSGI_APPLICATION = 'djangopypi2.website.wsgi.application'
 
-LOGIN_URL = '/accounts/login/'
-LOGOUT_URL = '/accounts/logout/'
+# LOGIN_URL = '/accounts/login/'
+# LOGOUT_URL = '/accounts/logout/'
 LOGIN_REDIRECT_URL = '/'
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend"
+)
 
 TEMPLATE_CONTEXT_PROCESSORS = [
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.request',
+
+    "allauth.account.context_processors.account",
+    "allauth.socialaccount.context_processors.socialaccount"
 ]
 
 WEBSITE_ROOT = os.path.dirname(os.path.realpath(__file__))
@@ -114,6 +121,11 @@ INSTALLED_APPS = (
     'djangopypi2.apps.pypi_metadata',
     'djangopypi2.apps.pypi_packages',
     'djangopypi2.apps.pypi_frontend',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7

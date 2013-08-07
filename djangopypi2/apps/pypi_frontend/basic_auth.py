@@ -1,6 +1,10 @@
+import hashlib
+
 from django.http import HttpResponse
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
+
+from allauth.socialaccount.models import SocialAccount
 
 try:
     from functools import wraps, WRAPPER_ASSIGNMENTS
@@ -29,7 +33,24 @@ def _login_basic_auth(request):
         return
     auth = auth.strip().decode("base64")
     username, password = auth.split(":", 1)
-    return authenticate(username=username, password=password)
+    user = authenticate(username=username, password=password)
+    if user:
+        return user
+
+    # If normal authentication failed, try github login
+    try:
+        acc = SocialAccount.objects.filter(uid = username, provider__exact = "github")[:1].get()
+        if hashlib.sha1(acc.socialtoken_set.get().token).hexdigest() == password:
+
+            # HACK! See allauth/account/utils.py:perform_login if the hack is resolved there one day
+            # The right thing is to call authenticate() however there is no password...
+            if not hasattr(acc.user, 'backend'):
+                acc.user.backend = "django.contrib.auth.backends.ModelBackend"
+
+            return acc.user
+    except DoesNotExist:
+        return None
+    return None
 
 def basic_auth(view_func):
     """ Decorator for views that need to handle basic authentication such as

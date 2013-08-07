@@ -29,6 +29,7 @@ def static_urls():
 urlpatterns = patterns('',
     url(r'^' + (settings.USER_SETTINGS['WEB_ROOT'].strip('/') + r'/'      ).lstrip('/'), include('djangopypi2.urls')),
     url(r'^' + (settings.USER_SETTINGS['WEB_ROOT'].strip('/') + r'/admin/').lstrip('/'), include(admin.site.urls)),
-    url(r'^' + (settings.USER_SETTINGS['WEB_ROOT'].strip('/') + r'/accounts/logout/$').lstrip('/'), logout, {'next_page': '/' + settings.USER_SETTINGS['WEB_ROOT'].strip('/')}, name = 'auth_logout'),
-    url(r'^' + (settings.USER_SETTINGS['WEB_ROOT'].strip('/') + r'/accounts/').lstrip('/'), include('registration.backends.default.urls')),
+    url(r'^' + (settings.USER_SETTINGS['WEB_ROOT'].strip('/') + r'/accounts/').lstrip('/'), include('allauth.urls')),
+    # url(r'^' + (settings.USER_SETTINGS['WEB_ROOT'].strip('/') + r'/accounts/logout/$').lstrip('/'), logout, {'next_page': '/' + settings.USER_SETTINGS['WEB_ROOT'].strip('/')}, name = 'auth_logout'),
+    # url(r'^' + (settings.USER_SETTINGS['WEB_ROOT'].strip('/') + r'/accounts/').lstrip('/'), include('registration.backends.default.urls')),
 ) + static_urls()
