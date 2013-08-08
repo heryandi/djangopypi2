@@ -1,0 +1,31 @@
+{% extends "account/base_form.html" %}
+
+{% load account %}
+
+{% block title %}Login{% endblock %}
+{% block form_header %}{% endblock %}
+
+{% block form_before %}
+    {% if socialaccount.providers  %}
+        <h3>Login with 3rd-party account</h3>
+        <div>
+          <ul class="offset1">
+            {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+          </ul>
+        </div>
+        {% include "socialaccount/snippets/login_extra.html" %}
+    {% endif %}
+{% endblock %}
+
+{% block form_text %}
+    <h3>Login with {{ site.name }} account</h3>
+{% endblock %}
+
+{% block form_action %}
+    {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    <input type="submit" class="btn btn-primary">
+    <a class="btn btn-warning" href="{% url 'account_reset_password' %}">Forgot Password?</a>
+{% endblock %}
+

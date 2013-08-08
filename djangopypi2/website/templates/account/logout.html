@@ -1,0 +1,18 @@
+{% extends "account/base.html" %}
+
+{% block head_title %} Logout {% endblock %}
+
+{% block content %}
+<h1>Logout</h1>
+<div class="hero-unit">
+
+<form method="post" action="{% url 'account_logout' %}">
+    {% csrf_token %}
+    {% if redirect_field_value %}
+        <input type="hidden" name="{{redirect_field_name}}" value="{{redirect_field_value}}"/>
+    {% endif %}
+    <p>Are you sure you want to log out?</p>
+    <button class="btn btn-success" type="submit">Yes, logout</button>
+</form>
+</div>
+{% endblock %}

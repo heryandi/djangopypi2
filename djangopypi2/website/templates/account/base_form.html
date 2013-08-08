@@ -1,0 +1,43 @@
+{% extends "account/base.html" %}
+
+{% block content %}
+<div class="hero-unit">
+    <h2>{% block form_header %}{% endblock %}</h2>
+
+    {% if form.non_field_errors %}
+        <div class="alert alert-error">
+            {% for error in form.non_field_errors %}
+                {{ error }}<br>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% block form_before %}{% endblock %}
+
+    <form method="post" class="form-horizontal">
+        {% csrf_token %}
+        <p>{% block form_text %}{% endblock %}</p>
+
+        {% for field in form %}
+        <div class="control-group">
+            <label class="control-label" for="{{ field.auto_id }}">{{ field.label }}</label>
+            <div class="controls">
+                {{ field }}
+                <span class="help-inline">
+                    {% for error in field.errors %}
+                        <span class="text-error">{{ error }}</span>
+                    {% endfor %}
+                </span>
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="form-actions">
+            {% block form_action %}
+            <input type="submit" class="btn btn-primary">
+            {% endblock %}
+        </div>
+        {% block form_after %}{% endblock %}
+    </form>
+</div>
+{% endblock %}
