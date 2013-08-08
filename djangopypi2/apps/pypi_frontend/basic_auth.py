@@ -1,5 +1,6 @@
 import hashlib
 
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
@@ -48,7 +49,7 @@ def _login_basic_auth(request):
                 acc.user.backend = "django.contrib.auth.backends.ModelBackend"
 
             return acc.user
-    except DoesNotExist:
+    except ObjectDoesNotExist:
         return None
     return None
 
