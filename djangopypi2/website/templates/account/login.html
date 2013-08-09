@@ -1,13 +1,11 @@
 {% extends "account/base_form.html" %}
 
-{% load account %}
-
 {% block title %}Login{% endblock %}
-{% block form_header %}{% endblock %}
+{% block form_header %}Login{% endblock %}
 
 {% block form_before %}
     {% if socialaccount.providers  %}
-        <h3>Login with 3rd-party account</h3>
+        <h3>Using 3rd-party account</h3>
         <div>
           <ul class="offset1">
             {% include "socialaccount/snippets/provider_list.html" with process="login" %}
@@ -18,14 +16,15 @@
 {% endblock %}
 
 {% block form_text %}
-    <h3>Login with {{ site.name }} account</h3>
+    <h3>Using {{ site.name }} account</h3>
 {% endblock %}
 
 {% block form_action %}
     {% if redirect_field_value %}
     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
     {% endif %}
-    <input type="submit" class="btn btn-primary">
+    <input type="submit" class="btn btn-primary" value="Login">
     <a class="btn btn-warning" href="{% url 'account_reset_password' %}">Forgot Password?</a>
+    <a class="btn btn-info" href="{% url 'account_signup' %}">Register</a>
 {% endblock %}
 

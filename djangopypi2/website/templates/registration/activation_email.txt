@@ -1,6 +1,0 @@
-Thank you for registering with {{ site }}!
-Click on the link below within {{ expiration_days }} days to activate your account:
-
-http://{{ site }}/accounts/activate/{{ activation_key }}/
-
-If you don't register for an account at {{ site }}, simply ignore this email.

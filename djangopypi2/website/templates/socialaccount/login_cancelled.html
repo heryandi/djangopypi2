@@ -1,0 +1,11 @@
+{% extends "socialaccount/base.html" %}
+
+{% block title %} Login Cancelled {% endblock %}
+
+{% block content %}
+<h1>Login cancelled</h1>
+<div class="hero-unit">
+    <p>If you want to try logging in again, please proceed to <a href="{% url 'account_login' %}">sign in</a>.
+</div>
+{% endblock %}
+

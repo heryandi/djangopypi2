@@ -1,9 +1,0 @@
-{% extends "registration/base_form.html" %}
-
-{% block title %}Login{% endblock %}
-{% block form_header %}Login{% endblock %}
-{% block form_extra %}
-    <a href="{% url 'auth_password_reset' %}">Forgot your password?</a>
-    <br/>
-    Don't have an account yet? <a href="{% url 'registration_register' %}">Register for an account first!</a>
-{% endblock %}
