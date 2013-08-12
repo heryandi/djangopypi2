@@ -18,24 +18,28 @@
         <a href="{% url 'djangopypi2-pypi-release-doap' package_name=release.package.name version=release.version %}"><i class="icon-tags">&nbsp;</i> DOAP XML</a>
       </li>
       {% if request.user.is_authenticated %}
-      <li class="divider"></li>
-      <li>
-        <a href="{% url 'djangopypi2-release-edit-details' package_name=release.package.name version=release.version %}"><i class="icon-pencil">&nbsp;</i> Edit Details</a>
-      </li>
-      <li>
-        <a href="{% url 'djangopypi2-release-edit-metadata' package_name=release.package.name version=release.version %}"><i class="icon-pencil">&nbsp;</i> Edit Metadata</a>
-      </li>
-      <li class="divider"></li>
-      <li>
-        <a href="{% url 'djangopypi2-release-manage-files' package_name=release.package.name version=release.version %}"><i class="icon-file">&nbsp;</i> Manage Files</a>
-      </li>
-      <li>
-        <a href="{% url 'djangopypi2-release-upload-file' package_name=release.package.name version=release.version %}"><i class="icon-upload">&nbsp;</i> Upload File</a>
-      </li>
-      <li class="divider"></li>
-      <li>
-        <a href="{% url 'djangopypi2-release-delete' package_name=release.package.name version=release.version %}"><i class="icon-trash">&nbsp;</i> Delete</a>
-      </li>
+        {% if release.package in request.user.packages_maintained.all or release.package in request.user.packages_owned.all %}
+        <li class="divider"></li>
+        <li>
+          <a href="{% url 'djangopypi2-release-edit-details' package_name=release.package.name version=release.version %}"><i class="icon-pencil">&nbsp;</i> Edit Details</a>
+        </li>
+        <li>
+          <a href="{% url 'djangopypi2-release-edit-metadata' package_name=release.package.name version=release.version %}"><i class="icon-pencil">&nbsp;</i> Edit Metadata</a>
+        </li>
+        <li class="divider"></li>
+        <li>
+          <a href="{% url 'djangopypi2-release-manage-files' package_name=release.package.name version=release.version %}"><i class="icon-file">&nbsp;</i> Manage Files</a>
+        </li>
+        <li>
+          <a href="{% url 'djangopypi2-release-upload-file' package_name=release.package.name version=release.version %}"><i class="icon-upload">&nbsp;</i> Upload File</a>
+        </li>
+        {% endif %}
+        {% if release.package in request.user.packages_owned.all %}
+        <li class="divider"></li>
+        <li>
+          <a href="{% url 'djangopypi2-release-delete' package_name=release.package.name version=release.version %}"><i class="icon-trash">&nbsp;</i> Delete</a>
+        </li>
+        {% endif %}
       {% endif %}
     </ul>
   </span>

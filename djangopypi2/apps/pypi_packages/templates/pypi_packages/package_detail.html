@@ -17,14 +17,16 @@
         <a href="{% url 'djangopypi2-pypi-package-doap' package_name=package.name %}"><i class="icon-tags">&nbsp;</i> DOAP XML</a>
       </li>
       {% if request.user.is_authenticated %}
-      <li class="divider"></li>
-      <li>
-        <a href="{% url 'djangopypi2-package-permission' package_name=package.name %}"><i class="icon-check">&nbsp;</i> Manage Permission</a>
-      </li>
-      <li class="divider"></li>
-      <li>
-        <a href="{% url 'djangopypi2-package-delete' package_name=package.name %}"><i class="icon-trash">&nbsp;</i> Delete</a>
-      </li>
+        {% if package in request.user.packages_owned.all %}
+        <li class="divider"></li>
+        <li>
+            <a href="{% url 'djangopypi2-package-permission' package_name=package.name %}"><i class="icon-check">&nbsp;</i> Manage Permission</a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <a href="{% url 'djangopypi2-package-delete' package_name=package.name %}"><i class="icon-trash">&nbsp;</i> Delete</a>
+        </li>
+        {% endif %}
       {% endif %}
     </ul>
   </div>

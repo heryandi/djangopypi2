@@ -27,9 +27,7 @@ def user_owns_package(login_url=None, redirect_field_name=REDIRECT_FIELD_NAME):
             if (request.user.is_authenticated() and
                 request.user.packages_owned.filter(name=package_name).count() > 0):
                 return view_func(request, package_name=package_name, *args, **kwargs)
-            path = urlquote(request.get_full_path())
-            tup = login_url, redirect_field_name, path
-            return HttpResponseRedirect('%s?%s=%s' % tup)
+            return HttpResponseForbidden()
         return wraps(view_func, assigned=available_attrs(view_func))(_wrapped_view)
     return decorator
 
@@ -48,8 +46,6 @@ def user_maintains_package(login_url=None, redirect_field_name=REDIRECT_FIELD_NA
                 (request.user.packages_owned.filter(name=package_name).count() > 0 or
                 request.user.packages_maintained.filter(name=package_name).count() > 0)):
                 return view_func(request, package_name=package_name, *args, **kwargs)
-            path = urlquote(request.get_full_path())
-            tup = login_url, redirect_field_name, path
-            return HttpResponseRedirect('%s?%s=%s' % tup)
+            return HttpResponseForbidden()
         return wraps(view_func, assigned=available_attrs(view_func))(_wrapped_view)
     return decorator
