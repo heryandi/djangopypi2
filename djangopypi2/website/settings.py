@@ -114,7 +114,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'registration',
     'djangopypi2.apps.pypi_ui',
     'djangopypi2.apps.pypi_users',
     'djangopypi2.apps.pypi_manage',
