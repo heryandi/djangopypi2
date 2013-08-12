@@ -10,7 +10,7 @@
     <div class="btn-group pull-right">
       <button class="btn dropdown-toggle" data-toggle="dropdown">Settings <span class="caret"></span></button>
       <ul class="dropdown-menu">
-        {% if request.user.request.user.has_usable_password %}
+        {% if request.user.has_usable_password %}
           <li>
             <a href="{% url 'account_change_password' %}"><i class="icon-lock">&nbsp;</i> Change Password</a>
           </li>
