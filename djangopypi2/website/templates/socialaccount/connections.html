@@ -5,8 +5,8 @@
 {% block content %}
 <h1>Account Management</h1>
 <div class="hero-unit">
+    <h3>Remove 3rd-party Account</h3>
     {% if form.accounts %}
-        <h3>Remove 3rd-party Account</h3>
         <form class="form-horizontal" method="post">
             {% csrf_token %}
             {% if form.non_field_errors %}

@@ -6,12 +6,32 @@
 <div class="hero-unit">
   <h2>
     {{ user_ }}
+    {% if request.user == user_ %}
+    <div class="btn-group pull-right">
+      <button class="btn dropdown-toggle" data-toggle="dropdown">Settings <span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        {% if request.user.request.user.has_usable_password %}
+          <li>
+            <a href="{% url 'account_change_password' %}"><i class="icon-lock">&nbsp;</i> Change Password</a>
+          </li>
+        {% else %}
+          <li>
+            <a href="{% url 'account_set_password' %}"><i class="icon-lock">&nbsp;</i> Set Password</a>
+          </li>
+        {% endif %}
+        <li class="divider"></li>
+        <li>
+          <a href="{% url 'socialaccount_connections' %}"><i class="icon-check">&nbsp;</i> 3rd-party Connections</a>
+        </li>
+      </ul>
+    </div>
+    {% endif %}
     <small>{{ user_.email }}</small>
-    <p>
-      Joined: {{ user_.date_joined }}<br/>
-      Last logged-in: {{ user_.last_login|timesince }} ago
-    </p>
   </h2>
+  <p>
+    Joined: {{ user_.date_joined }}<br/>
+    Last logged-in: {{ user_.last_login|timesince }} ago
+  </p>
 </div>
 
 <div class="row">
