@@ -105,6 +105,9 @@ WEBSITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 TEMPLATE_DIRS = (
     os.path.join(WEBSITE_ROOT, 'templates'),
 )
+FIXTURE_DIRS = (
+    os.path.join(WEBSITE_ROOT, 'fixtures'),
+)
 
 INSTALLED_APPS = (
     'django.contrib.auth',

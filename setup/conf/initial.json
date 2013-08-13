@@ -1,0 +1,13 @@
+[
+    {{
+        "model": "socialaccount.socialapp",
+        "pk": 1,
+        "fields": {{
+            "provider": "github",
+            "name": "{client_name}",
+            "client_id": "{client_id}",
+            "key": "",
+            "secret": "{client_secret}"
+        }}
+    }}
+]
