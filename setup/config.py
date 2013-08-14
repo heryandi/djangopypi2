@@ -14,6 +14,7 @@ from conf.github_oauth import *
 root_folder = os.path.dirname(os.path.realpath(__file__))
 conf_folder = os.path.join(root_folder, "conf")
 keys_folder = os.path.join(root_folder, "keys")
+requirements_file = os.path.join(conf_folder, "requirements.txt")
 
 venv_folder = os.path.expanduser("~/venv/")
 #venv_folder = os.path.join(os.path.dirname(os.path.realpath(__file__)), "test")
@@ -104,12 +105,12 @@ def delete_venv_dir():
 
 def install_prereq():
     subprocess.call(["sudo", "apt-get", "update"])
-    subprocess.call(["sudo", "apt-get", "install"] + ["nginx", "python-virtualenv"])
+    subprocess.call(["sudo", "apt-get", "-y", "install"] + ["nginx", "python-virtualenv"])
     subprocess.call(["virtualenv", venv_folder])
     execfile(venv_activate_file_py, dict(__file__=venv_activate_file_py))
 
     subprocess.call(["pip", "install", "pip", "--upgrade"])
-    subprocess.call(["pip", "install", "gunicorn", "supervisor==3.0b2"])
+    subprocess.call(["pip", "install", "-r", requirements_file])
 
 def clone_djangopypi2():
     subprocess.call(["git", "clone", djpp_git, djpp_folder])
