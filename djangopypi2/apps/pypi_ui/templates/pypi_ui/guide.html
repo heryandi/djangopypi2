@@ -48,13 +48,13 @@
         </p>
         <p>
             <p>To create a virtual environment, simply use this command:</p>
-            <pre>virtualenv --distribute &lt;folder_name&gt;</pre>
+            <pre>virtualenv &lt;folder_name&gt;</pre>
 
             <p>For example, to create a virtual environment under the folder venv, use the command as below:</p>
-            <pre>user@ubuntu:~/Desktop$ virtualenv --distribute venv
+            <pre>user@ubuntu:~/Desktop$ virtualenv venv
 New python executable in venv/bin/python
-Installing distribute...........................................................................................................................................................................................................................done.
-Installing pip................done.</pre>
+Installing setuptools............done.
+Installing pip...............done.</pre>
         </p>
         <h5>Activating a virtual environment</h5>
         <p>
@@ -84,7 +84,8 @@ Installing pip................done.</pre>
         <h4>Installing mnp</h4>
         <p>
             To make it easier to download and upload packages, a package called <span class="label">mnp</span> has been developed.
-            To install <span class="label">mnp</span> into your virtual environment, make sure the virtual environment is activated and then use the command below:
+            For the full feature list of mnp, visit the mnp project page.
+            To install mnp into your virtual environment, make sure the virtual environment is activated and then use the command below:
         </p>
         <pre>pip install --extra-index-url http://localhost:8000/simple/ mnp</pre>
         <h4>TODO: Change URL later!</h4>
@@ -92,7 +93,7 @@ Installing pip................done.</pre>
         <h4>Account registration and .pypirc</h4>
         <p>
             You may skip over this step, if you don't intend to contribute new packages yet.
-            In order to be able to contribute new packages, you will need to register for an account first.
+            In order to be able to contribute new packages, you will need to register for an account.
         </p>
         <p>
             Once you are registered, create a file called <span class="label">.pypirc</span> on your home directory with this content:
@@ -105,7 +106,24 @@ index-servers =
 username: &lt;your_username&gt;
 password: &lt;your_password&gt;
 repository: http://localhost:8000/pypi/</pre>
-        <h4>TODO: Change URL later!</h4>
+
+        <p>
+            If you already have an account with GitHub, you can also register by logging in with the GitHub login link in this website at least once.
+            If you do this, then the content of <span class="label">.pypirc</span> is a bit different:
+        </p>
+        <pre>[distutils]
+index-servers =
+    mininet
+
+[mininet]
+github_username: &lt;your_github_username&gt;
+github_password: &lt;your_github_password&gt;
+repository: http://localhost:8000/pypi/</pre>
+        <p>
+            Note that for GitHub account only, the github_password setting is optional if <span class="label">mnp</span> is used to upload packages.
+            If the github_password is not set, <span class="label">mnp</span> will simply ask for the GitHub password when it is run.
+        </p>
+        <h4>TODO: Change repository URL later!</h4>
 
     </div>
 
@@ -328,9 +346,9 @@ setup(
 
         <h4>About mnp</h4>
         <p>
-            mnp is simply a wrapper over existing Python tools to download and upload packages, namely distribute and pip.
-            Under the hood, mnp commands are translated to craft either distribute or pip commands and then executed.
-            Knowing this, it is possible that sometimes you may want to directly use distribute/pip.
+            mnp is simply a wrapper over existing Python tools to download and upload packages, namely setuptools and pip.
+            Under the hood, mnp commands are translated to craft either setuptools or pip commands and then executed.
+            Knowing this, it is possible that sometimes you may want to directly use setuptools/pip.
             This is perfectly acceptable.
         </p>
     </div>
