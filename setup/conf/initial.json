@@ -1,6 +1,6 @@
 [
     {{
-        "model": "django.contrib.sites.models.Site",
+        "model": "sites.site",
         "pk": 1,
         "fields": {{
             "domain": "{site_domain}",
