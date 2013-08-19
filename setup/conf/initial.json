@@ -1,5 +1,13 @@
 [
     {{
+        "model": "django.contrib.sites.models.Site",
+        "pk": 1,
+        "fields": {{
+            "domain": "{site_domain}",
+            "name": "{site_name}"
+        }}
+    }},
+    {{
         "model": "socialaccount.socialapp",
         "pk": 1,
         "fields": {{

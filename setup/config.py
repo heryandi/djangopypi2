@@ -46,6 +46,9 @@ nginx_sites_enabled = "/etc/nginx/sites-enabled/djangopypi2"
 """
 Variables used to generate configuration files
 """
+djpp_data_site_name = "localpypi"
+djpp_data_site_domain = "localhost:8000"
+
 djpp_data_github_client_name = GITHUB_CLIENT_NAME
 djpp_data_github_client_id = GITHUB_APP_ID
 djpp_data_github_client_secret = GITHUB_APP_SECRET
@@ -84,6 +87,8 @@ context = dict(
     venv_folder=venv_folder,
     venv_activate_file=venv_activate_file,
 
+    site_name=djpp_data_site_name,
+    site_domain=djpp_data_site_domain,
     client_name=djpp_data_github_client_name,
     client_id=djpp_data_github_client_id,
     client_secret=djpp_data_github_client_secret,
