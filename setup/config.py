@@ -36,7 +36,7 @@ copy_files = [
     (os.path.join(conf_folder, "gunicorn.sh"), gunicorn_script),
     (os.path.join(conf_folder, "supervisord.conf"), os.path.join(venv_conf_folder, "supervisord.conf")),
     (os.path.join(conf_folder, "initial.json"), os.path.join(djpp_django_folder, "website", "fixtures", "initial.json")),
-    (os.path.join(conf_folder, "settings.json"), os.path.expanduser("~/.djangopypi2/")),
+    (os.path.join(conf_folder, "settings.json"), os.path.expanduser("~/.djangopypi2/settings.json")),
 ]
 
 # for soft-link
@@ -125,7 +125,7 @@ def delete_venv_dir():
 
 def install_prereq():
     subprocess.call(["sudo", "apt-get", "update"])
-    subprocess.call(["sudo", "apt-get", "-y", "install"] + ["nginx", "python-virtualenv", "postgresql", "libpq-dev"])
+    subprocess.call(["sudo", "apt-get", "-y", "install"] + ["nginx", "python-virtualenv", "postgresql", "libpq-dev", "python-dev"])
     subprocess.call(["virtualenv", venv_folder])
     execfile(venv_activate_file_py, dict(__file__=venv_activate_file_py))
 
