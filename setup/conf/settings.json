@@ -1,0 +1,21 @@
+{{
+    "DEBUG": true,
+    "ADMINS": [],
+    "LANGUAGE_CODE": "en-us",
+    "TIME_ZONE": "America/Chicago",
+    "WEB_ROOT": "/",
+    "ALLOW_VERSION_OVERWRITE": "",
+    "USE_HTTPS": true,
+
+    "EMAIL_DEFAULT_SENDER": "{email_default_sender}",
+    "EMAIL_USE_TLS": {email_use_tls},
+    "EMAIL_SERVER": "{email_server}",
+
+    "DB_ENGINE": "django.db.backends.postgresql_psycopg2",
+    "DB_FOLDER": "PROJECT_ROOT",
+    "DB_NAME": "{db_name}",
+    "DB_HOST": "{db_host}",
+    "DB_PORT": "{db_port}",
+    "DB_USER": "{db_user}",
+    "DB_PASSWORD": "{db_password}"
+}}

@@ -30,13 +30,13 @@ djpp_django_folder = os.path.join(djpp_folder, "djangopypi2")
 
 gunicorn_script = os.path.join(venv_conf_folder, "gunicorn.sh")
 nginx_conf = os.path.join(venv_conf_folder, "nginx.conf")
-djpp_data_json = os.path.join(djpp_django_folder, "website", "fixtures", "initial.json")
 # list of file paths to copy (src, dst)
 copy_files = [
     (os.path.join(conf_folder, "nginx.conf"), nginx_conf),
     (os.path.join(conf_folder, "gunicorn.sh"), gunicorn_script),
     (os.path.join(conf_folder, "supervisord.conf"), os.path.join(venv_conf_folder, "supervisord.conf")),
-    (os.path.join(conf_folder, "initial.json"), djpp_data_json)
+    (os.path.join(conf_folder, "initial.json"), os.path.join(djpp_django_folder, "website", "fixtures", "initial.json")),
+    (os.path.join(conf_folder, "settings.json"), os.path.expanduser("~/.djangopypi2/")),
 ]
 
 # for soft-link
@@ -49,6 +49,16 @@ Variables used to generate configuration files
 djpp_data_github_client_name = GITHUB_CLIENT_NAME
 djpp_data_github_client_id = GITHUB_APP_ID
 djpp_data_github_client_secret = GITHUB_APP_SECRET
+
+djpp_email_default_sender = "sender@example.org"
+djpp_email_use_tls = "false"
+djpp_email_server = "smtp://localhost:1025/"
+
+djpp_db_name = "djangopypi2"
+djpp_db_host = "localhost"
+djpp_db_port = "5432"
+djpp_db_user = "postgres"
+djpp_db_password = "password"
 
 gunicorn_worker = 3
 gunicorn_user = "user"
@@ -77,6 +87,16 @@ context = dict(
     client_name=djpp_data_github_client_name,
     client_id=djpp_data_github_client_id,
     client_secret=djpp_data_github_client_secret,
+
+    email_default_sender = djpp_email_default_sender,
+    email_use_tls = djpp_email_use_tls,
+    email_server = djpp_email_server,
+
+    db_name = djpp_db_name,
+    db_host = djpp_db_host,
+    db_port = djpp_db_port,
+    db_user = djpp_db_user,
+    db_password = djpp_db_password,
 
     gunicorn_worker=gunicorn_worker,
     gunicorn_user=gunicorn_user,
