@@ -40,10 +40,20 @@ MANAGERS = ADMINS
 
 ALLOWED_HOSTS = ['*']
 
+if USER_SETTINGS['DB_ENGINE'] == 'django.db.backends.sqlite3':
+    if USER_SETTINGS['DB_FOLDER'] == 'PROJECT_ROOT':
+        USER_SETTINGS['DB_NAME'] = os.path.join(PROJECT_ROOT, USER_SETTINGS['DB_NAME'])
+    else:
+        USER_SETTINGS['DB_NAME'] = os.path.join(USER_SETTINGS['DB_FOLDER'], USER_SETTINGS['DB_NAME'])
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(PROJECT_ROOT, 'db.sqlite3'),
+        'ENGINE': USER_SETTINGS['DB_ENGINE'],
+        'NAME': USER_SETTINGS['DB_NAME'],
+        'HOST': USER_SETTINGS['DB_HOST'],
+        'PORT': USER_SETTINGS['DB_PORT'],
+        'USER': USER_SETTINGS['DB_USER'],
+        'PASSWORD': USER_SETTINGS['DB_PASSWORD']
     }
 }
 

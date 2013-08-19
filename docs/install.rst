@@ -107,9 +107,18 @@ in the ``PROJECT_ROOT`` directory::
         "WEB_ROOT": "/",
         "ALLOW_VERSION_OVERWRITE: "",
         "USE_HTTPS": false,
+
         "EMAIL_SERVER": "smtp://localhost:1025/",
         "EMAIL_USE_TLS": false,
-        "EMAIL_DEFAULT_SENDER": "sender@example.com"
+        "EMAIL_DEFAULT_SENDER": "sender@example.com",
+
+        "DB_ENGINE": "django.db.backends.sqlite3",
+        "DB_FOLDER": "PROJECT_ROOT",
+        "DB_NAME": "db.sqlite3",
+        "DB_HOST": "",
+        "DB_PORT": "",
+        "DB_USER": "",
+        "DB_PASSWORD": ""
     }
 
 The ``DEBUG``, ``ADMINS``, ``LANGUAGE_CODE`` and ``TIME_ZONE`` are exactly the same
@@ -145,6 +154,31 @@ the SMTP server.
 
 The ``EMAIL_DEFAULT_SENDER`` setting allows you to set the default sender email
 for the SMTP server.
+
+The settings with name starting with ``DB_`` are the database settings. If you
+are using sqlite3, then only these settings matter::
+
+    "DB_ENGINE": "django.db.backends.sqlite3",
+    "DB_FOLDER": "PROJECT_ROOT",
+    "DB_NAME": "db.sqlite3",
+
+``DB_FOLDER`` and ``DB_NAME`` are the directory and filename where the sqlite3
+file resides respectively. For ``DB_FOLDER``, you may use the special value
+``PROJECT_ROOT`` to use the value of the ``DJANGOPYPI2_ROOT`` environment
+variable as the directory containing the sqlite3 file.
+
+If you are not using sqlite3, then all settings except ``DB_FOLDER`` matters.
+As an example, to setup djangopypi2 with postgreSQL::
+
+    "DB_ENGINE": "django.db.backends.postgresql_psycopg2",
+    "DB_NAME": "djangopypi2",
+    "DB_HOST": "localhost",
+    "DB_PORT": "5432",
+    "DB_USER": "postgres",
+    "DB_PASSWORD": "password"
+
+Make sure to actually create the database with name ``djangopypi2`` beforehand.
+You also need to install ``psycopg2`` package separately.
 
 
 Package upload directory

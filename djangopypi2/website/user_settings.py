@@ -13,6 +13,14 @@ AVAILABLE_SETTINGS = [
     dict(name='EMAIL_SERVER' , default='smtp://localhost:1025/', type='str'),
     dict(name='EMAIL_USE_TLS', default=False            , type='bool'),
     dict(name='EMAIL_DEFAULT_SENDER', default='sender@example.com', type='str'),
+
+    dict(name='DB_ENGINE'    , default='django.db.backends.sqlite3', type='str'),
+    dict(name='DB_FOLDER'    , default='PROJECT_ROOT'   , type='str'),
+    dict(name='DB_NAME'      , default='db.sqlite3'     , type='str'),
+    dict(name='DB_HOST'      , default=''               , type='str'),
+    dict(name='DB_PORT'      , default=''               , type='str'),
+    dict(name='DB_USER'      , default=''               , type='str'),
+    dict(name='DB_PASSWORD'  , default=''               , type='str'),
 ]
 
 def _filename(project_root):
