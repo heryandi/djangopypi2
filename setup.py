@@ -45,9 +45,10 @@ setup(
     install_requires=[
         'Django == 1.5.1',
         'django-allauth',
-        'setuptools',
-        'pkginfo',
         'docutils',
+        'pkginfo',
+        'psycopg2',
+        'setuptools',
     ],
 
     setup_requires=[

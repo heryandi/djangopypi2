@@ -105,7 +105,7 @@ def delete_venv_dir():
 
 def install_prereq():
     subprocess.call(["sudo", "apt-get", "update"])
-    subprocess.call(["sudo", "apt-get", "-y", "install"] + ["nginx", "python-virtualenv"])
+    subprocess.call(["sudo", "apt-get", "-y", "install"] + ["nginx", "python-virtualenv", "postgresql", "libpq-dev"])
     subprocess.call(["virtualenv", venv_folder])
     execfile(venv_activate_file_py, dict(__file__=venv_activate_file_py))
 
