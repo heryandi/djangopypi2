@@ -333,6 +333,23 @@ setup(
         <pre>mnp upload</pre>
         <p>The command above will automatically zip your package together and then upload it to the server,
            automatically reading your login information from the <span class="label">.pypirc</span> file.</p>
+
+        <p>Note however that the command above will only work with account registered on this website.
+           If you want to use your github account, you need to add a few lines to setup.py:</p>
+        <pre>import mnp.patch                  # Add this line
+from setuptools import setup, find_packages
+
+setup(
+    ... (values) ...
+    install_requires=[
+        &lt;comma_separated_package_names&gt;,
+        "mnp"                     # Add this line
+    ],
+    ... (values) ...
+</pre>
+        <p>
+            By adding those few lines, the command <span class="label">mnp upload</span> will automatically read your GitHub account information from <span class="label">.pypirc</span>.
+        </p>
     </div>
 
     <div class="tab-pane" id="advanced">
