@@ -118,16 +118,17 @@ def search(request, spec, operator='or'):
 
     # Note: The implementation below is just enough to make "pip search" works.
     # It is not the full implementation of PyPI XMLRPC API
-    name = spec['name']
-    summary = spec['summary']
+    name = spec['name'] if 'name' in spec else ''
+    summary = spec['summary'] if 'summary' in spec else ''
 
     results = Release.simple_search(name, summary)
     response = []
     for result in results:
+        result_summary = result.package_info['summary'] if 'summary' in result.package_info else ''
         output = {
             'name': result.package.name,
             'version': result.version,
-            'summary': result.package_info["summary"],
+            'summary': result_summary,
         }
         response.append(output)
     return XMLRPCResponse(params=(response,))
