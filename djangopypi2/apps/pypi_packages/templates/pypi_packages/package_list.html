@@ -24,6 +24,7 @@
 <table class="table table-striped table-condensed table-bordered">
   <thead>
     <th>Package</th>
+    <th>Summary</th>
     <th>Latest version</th>
     <th>Released</th>
   </thead>
@@ -35,7 +36,10 @@
         <a href="{{ package.get_absolute_url }}">{{ package.name }}</a>
       </td>
       <td>
-        {% if package.latest %}{{ package.latest.version }}{% endif %}
+        {{ package.latest.summary }}
+      </td>
+      <td>
+        {{ package.latest.version }}
       </td>
       <td>
         {% if package.latest %}{{ package.latest.created|timesince }} ago{% endif %}
