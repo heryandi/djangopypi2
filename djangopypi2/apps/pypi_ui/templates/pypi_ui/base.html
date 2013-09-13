@@ -17,7 +17,7 @@
       <div class="navbar">
         <div class="navbar-inner">
           <div class="container pull-left">
-            <a class="brand" href="/">Django PyPi</a>
+            <a class="brand" href="/">Mininet Repo</a>
             <ul class="nav">
               <li {% block packages_section %}{% endblock %}><a href="{% url 'djangopypi2-packages-index' %}">Packages</a></li>
               <li {% block users_section %}{% endblock %}><a href="{% url 'djangopypi2-users' %}">Users</a></li>
@@ -69,14 +69,16 @@
       <div class="container">
         <div class="row">
           <div class="span4">
-            <strong><u>Django PyPi 2</u></strong><br>
+            <strong><u>Mininet Repo</u></strong><br>
             BSD Licensed<br>
-            <a href="http://popen2.github.com/djangopypi2/">http://popen2.github.com/djangopypi2/</a>
+            <a href="https://github.com/heryandi/djangopypi2">https://github.com/heryandi/djangopypi2</a><br>
+            Based on <strong><a href="http://popen2.github.com/djangopypi2/">Django PyPi 2</a></strong>
           </div>
           <div class="span4">
             <strong><u>Navigation</u></strong><br>
-            <a href="/packages/">Packages</a><br>
-            <a href="/users/">Users</a><br>
+            <a href="{% url 'djangopypi2-packages-index' %}">Packages</a><br>
+            <a href="{% url 'djangopypi2-users' %}">Users</a><br>
+            <a href="{% url 'djangopypi2-guide' %}">Guide</a><br>
           </div>
           <div class="span4">
             <strong><u>Links</u></strong><br>
