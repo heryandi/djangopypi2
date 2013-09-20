@@ -134,6 +134,7 @@ class XmlRpcViewTest(TestCase):
         # Called internally by distribution.content.size.
         # Needed because the actual file is not there for unit tests.
         patcher = patch("os.path.getsize")
+        self.addCleanup(patcher.stop)
         self.mock_getsize = patcher.start()
         self.mock_getsize.return_value = "mockSize"
 

@@ -1,0 +1,124 @@
+[
+    {
+        "pk": "1",
+        "model": "auth.user",
+        "fields": {
+            "username": "user1",
+            "first_name": "",
+            "last_name": "",
+            "is_active": true,
+            "is_superuser": false,
+            "is_staff": false,
+            "last_login": "2013-06-19T15:39:52.079Z",
+            "groups": [],
+            "user_permissions": [],
+            "password": "pbkdf2_sha256$10000$xsDVf568pYim$IxjeeNudfCvCnjd2CX4AXAn2ccJwZS1UNU1x+HGYPyw=",
+            "email": "user1@user.com",
+            "date_joined": "2013-06-19T15:39:52.079Z"
+        }
+    },
+    {
+        "pk": "2",
+        "model": "auth.user",
+        "fields": {
+            "username": "user2",
+            "first_name": "",
+            "last_name": "",
+            "is_active": true,
+            "is_superuser": false,
+            "is_staff": false,
+            "last_login": "2013-06-19T15:39:52.079Z",
+            "groups": [],
+            "user_permissions": [],
+            "password": "pbkdf2_sha256$10000$zpI261B5dmdm$d+cJlL2eOrWtj5ZyY63AZxXJp2+cx0iuBOOgqPcm8Dg=",
+            "email": "user2@user.com",
+            "date_joined": "2013-06-19T15:39:52.079Z"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "auth.user",
+        "fields": {
+            "username": "user3",
+            "first_name": "",
+            "last_name": "",
+            "is_active": true,
+            "is_superuser": false,
+            "is_staff": false,
+            "last_login": "2013-07-12T13:47:33.033Z",
+            "groups": [],
+            "user_permissions": [],
+            "password": "pbkdf2_sha256$10000$m2TK5jXH0oj5$kPMyQOQe4Khzv9NKR2e01IGcsWaKb6vmfj8KlmdJR40=",
+            "email": "",
+            "date_joined": "2013-06-08T07:25:31Z"
+        }
+    },
+    {
+        "pk": "testPackage1",
+        "model": "pypi_packages.package",
+        "fields": {
+            "auto_hide": true,
+            "allow_comments": true,
+            "maintainers": [2],
+            "owners": [1]
+        }
+    },
+    {
+        "pk": 1,
+        "model": "pypi_packages.release",
+        "fields": {
+            "package": "testPackage1",
+            "version": "1.0.0",
+            "metadata_version": "1.1",
+            "created": "2013-07-05T11:00:58.313Z",
+            "package_info": "",
+            "hidden": false
+        }
+    },
+    {
+        "pk": "sdist",
+        "model": "pypi_metadata.distributiontype",
+        "fields": {"name": "Source"}
+    },
+    {
+        "pk": "1",
+        "model": "pypi_metadata.pythonversion",
+        "fields": {
+            "major": 2,
+            "minor": 7
+        }
+    },
+    {
+        "pk": 1,
+        "model": "pypi_packages.distribution",
+        "fields": {
+            "comment": "",
+            "created": "2013-08-07T14:11:03.772Z",
+            "md5_digest": "12345abcdef",
+            "filetype": "sdist",
+            "pyversion": 1,
+            "content": "dists/testPackage1-1.0.0.tar.gz",
+            "platform": null,
+            "uploader": null,
+            "signature": "",
+            "release": 1
+        }
+    },
+    {
+        "pk": "testPackage2",
+        "model": "pypi_packages.package",
+        "fields": {
+            "auto_hide": true,
+            "allow_comments": true
+        }
+    },
+    {
+        "pk": "testPackageNoRelease",
+        "model": "pypi_packages.package",
+        "fields": {
+            "auto_hide": true,
+            "allow_comments": true
+        }
+    }
+]
+
